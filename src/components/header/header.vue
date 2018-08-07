@@ -40,13 +40,13 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  height: 50px;
+  height: 65px;
   z-index: 10;
-  background: #54f4ff;
+  background: rgb(18,142,232);
 }
 
 .header-wrapper {
-  background: #902b2b;
+  background: rgb(18,142,232);
   height: 100%;
   display: flex;
   align-items: center;
@@ -60,7 +60,7 @@ export default {
 span {
   display: inline-block;
   font-size: 20px;
-  color: #eceaea;
+  color: rgb(254,254,255);
 }
 .icon-menu {
   color: #fff;

@@ -6,18 +6,20 @@
 
     <transition name="side">
       <div class="menu-content" v-show="isReallShow">
-        <div class="footer">
-          <div class="night-mode">
-            <i class="icon-night"></i>
-            <span>夜间模式</span>
+        <div class="head">
+          <div class="login-content">
+            <img  src="../../assets/image/timg.jpeg" alt="" class="avatar">
+            <span class="name">请登录</span>
           </div>
-          <div class="setting">
-            <i class="icon-setting"></i>
-            <span>设置</span>
-          </div>
-          <div class="exit">
-            <i class="icon-exit"></i>
-            <span>退出</span>
+          <div class="menu">
+            <div class="collection">
+              <i class="icon iconfont icon-collect"></i>
+              <span>我的收藏</span>
+            </div>
+            <div class="download">
+              <i class="icon iconfont icon-download"></i>
+              <span>我的下载</span>
+            </div>
           </div>
         </div>
       </div>
@@ -43,6 +45,52 @@ export default {
 </script>
 
 <style scoped>
+.menu span{
+  color: white;
+}
+.collection,
+.download {
+  width: 50%;
+  text-align: center;
+  line-height: 5.2;
+}
+.icon {
+  font-size: 24px;
+  color: white;
+  font-weight: bolder;
+}
+.menu {
+  display: flex;
+  height: 65px;
+}
+.name {
+  font-size: 16px;
+  color: #f7f7f7;
+  font-weight: lighter;
+}
+.avatar {
+  width: 36px;
+  border-radius: 50%;
+  line-height: 36px;
+  margin-right: 12px;
+}
+img {
+  vertical-align: middle;
+  color: transparent;
+  font-size: 0;
+}
+.head {
+  background: rgb(18, 142, 232);
+  height: 130px;
+  width: 100%;
+}
+.login-content {
+  height: 65px;
+  width: 100%;
+  padding-left: 20px;
+  line-height: 60px;
+}
+
 .fade-enter-to,
 .fade-leave-to {
   transition: opacity 0.3s;
