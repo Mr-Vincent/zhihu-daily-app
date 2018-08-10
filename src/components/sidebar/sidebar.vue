@@ -22,13 +22,18 @@
             </div>
           </div>
         </div>
+        <Catalog></Catalog>
       </div>
     </transition>
   </div>
 </template>
 
 <script>
+import Catalog from "./catalog.vue"
 export default {
+  components:{
+    Catalog
+  },
   methods: {
     hideMenu() {
       this.$store.dispatch({
@@ -154,7 +159,6 @@ img {
 }
 
 .menu-content {
-  background-color: rgb(228, 144, 144);
   position: fixed;
   width: 286px;
   height: 100%;
@@ -162,7 +166,6 @@ img {
   left: 0;
   bottom: 0;
   z-index: 11;
-  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 </style>
