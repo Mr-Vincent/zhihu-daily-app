@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="item" :class="{selected: item.selected}" v-for="item in list" :key="item.id" @click="changeTheme(item.id)">{{item.name}}
+    <div class="item" :class="{selected: item.selected}" v-for="item in filteredList" :key="item.id" @click="changeTheme(item.id)">{{item.name}}
       <i class="icon-add"></i>
     </div>
   </div>
@@ -63,24 +63,31 @@ var data = [
 export default {
   data() {
     return {
-      list: data
+      list: data,
+      selectedId:-1
     };
   },
   methods:{
     changeTheme(id){
       console.log(id);
-      this.list.map(item => {
-        if(item.id === id) {
-          item.selected = true;
-        }
+      this.selectedId = id;
+      this.$store.dispatch({
+        type: "hideSideBar"
       });
-      // this.$store.dispatch({
-      //   type: "hideSideBar"
-      // });
     }
   },
   computed:{
-
+    filteredList(){
+      let list = [...this.list];
+      list.map(item => {
+        if(item.id === this.selectedId) {
+          item.selected = true;
+        }else{
+          item.selected = false;
+        }
+      });
+      return list;
+    }
   }
 };
 </script>
@@ -109,5 +116,6 @@ export default {
 }
 .item:hover {
   background-color: #dfdfdf;
+  cursor: pointer;
 }
 </style>
