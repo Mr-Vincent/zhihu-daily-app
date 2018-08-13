@@ -2,15 +2,17 @@
   <div id="app">
     <Header :index="2"></Header>
     <Sidebar></Sidebar>
+    <Content></Content>
   </div>
 </template>
 
 <script>
 import Header from "./components/header/header.vue";
 import Sidebar from "./components/sidebar/sidebar.vue";
+import Content from "./components/content/content.vue";
 export default {
   components: {
-    Header,Sidebar
+    Header,Sidebar,Content
   },
   name: "app",
   data() {

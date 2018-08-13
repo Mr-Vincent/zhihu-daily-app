@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Http from '../lib/http';
+
 
 Vue.use(Vuex)
 
@@ -9,11 +11,12 @@ const HIDE_SIDEBAR = false
 
 const store = new Vuex.Store({
   state: {
-    isShow: false
+    isShow: false,
+    title: "",
+    home: {}
   },
   getters: {
     isShowMethod: state => {
-      console.log('isShowMethod');
       return state.isShow;
     }
 
@@ -24,6 +27,12 @@ const store = new Vuex.Store({
     },
     hideBar(state) {
       state.isShow = HIDE_SIDEBAR
+    },
+    setTitle(state, title) {
+      state.title = title
+    },
+    pendingHomeData(state, homeData) {
+      state.home = homeData;
     }
   },
   actions: {
@@ -36,6 +45,15 @@ const store = new Vuex.Store({
       commit
     }) {
       commit('hideBar')
+    },
+    getHomeData({
+      commit
+    }) {
+      // 获取API的数据
+      Http.get("4/news/latest").then(res => {
+        console.log(res);
+      });
+      commit('pendingHomeData',"haha")
     }
   },
 

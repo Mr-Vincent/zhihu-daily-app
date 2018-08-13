@@ -24,6 +24,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .icon-money .path1:before {
   content: "\e93b";
   color: rgb(255, 106, 72);

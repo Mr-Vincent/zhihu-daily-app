@@ -57,13 +57,30 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    overlay: true
+    overlay: true,
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    progress: true,
+    port: 8080,
+    host:'localhost'
+  },
+
+  proxyTable: {
+    '/4/news/*': {
+      target: 'https://news-at.zhihu.com/api/',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/list': '/list'
+      }
+    }
   },
   performance: {
     hints: false
   },
   devtool: '#eval-source-map'
 }
+
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'

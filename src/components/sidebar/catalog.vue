@@ -69,11 +69,12 @@ export default {
   },
   methods:{
     changeTheme(id){
-      console.log(id);
       this.selectedId = id;
       this.$store.dispatch({
         type: "hideSideBar"
       });
+      var target = this.list.find(item =>item.id === id);
+      this.$store.commit("setTitle",target.name);
     }
   },
   computed:{
