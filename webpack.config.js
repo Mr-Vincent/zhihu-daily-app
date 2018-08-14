@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var proxy = require('http-proxy-middleware')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
@@ -63,15 +64,14 @@ module.exports = {
     inline: true,
     progress: true,
     port: 8080,
-    host:'localhost'
-  },
-
-  proxyTable: {
-    '/4/news/*': {
-      target: 'https://news-at.zhihu.com/api/',
-      changeOrigin: true,
-      pathRewrite: {
-        '^/list': '/list'
+    host: 'localhost',
+    proxy: {
+      '/api': { // api表示当前项目请求的key
+        target: 'https://news-at.zhihu.com/api/4/', // 代理服务器路径
+        pathRewrite: {
+          '^/api': '/'
+        }, // 重写路径
+        changeOrigin: true
       }
     }
   },

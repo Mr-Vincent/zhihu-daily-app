@@ -50,10 +50,10 @@ const store = new Vuex.Store({
       commit
     }) {
       // 获取API的数据
-      Http.get("4/news/latest").then(res => {
-        console.log(res);
+      Http.get("/api/news/latest").then(res => {
+        commit('pendingHomeData',res);
       });
-      commit('pendingHomeData',"haha")
+      
     }
   },
 

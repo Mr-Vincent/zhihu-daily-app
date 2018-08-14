@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const http = axios.create({
-  baseURL: 'https://news-at.zhihu.com/api/',
+  baseURL: 'http://localhost:8080/',
   timeout: 3000
 });
 

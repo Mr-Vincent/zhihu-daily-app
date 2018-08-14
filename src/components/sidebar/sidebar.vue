@@ -155,7 +155,7 @@ img {
   opacity: 1;
   z-index: 10;
   background: rgba(0, 0, 0, 0.5);
-  transfrom: translateZ(0);
+  transform: translateZ(0);
 }
 
 .menu-content {
