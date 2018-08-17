@@ -1,7 +1,7 @@
 const home = {
   "date": "20180814",
   "stories": [{
-    "images": ["https:\/\/pic4.zhimg.com\/v2-e90c6e8dac3a0527e6d0ddb08f3735ef.jpg"],
+    "images": ["https://pic1.zhimg.com/v2-e4dfa0458ac58b454335e970cdea294c.jpg"],
     "type": 0,
     "id": 9692837,
     "ga_prefix": "081409",
