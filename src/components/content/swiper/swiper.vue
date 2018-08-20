@@ -19,7 +19,8 @@ export default {
   props:{
     headerData:{
       type:Array,
-      required:true
+      required:true,
+      default:[]
     }
   },
   watch: {
@@ -47,6 +48,7 @@ export default {
       let wrappers = this.$refs.imagesWrapper;
       let children = wrappers.children;
       let total = this.headerData.length;
+      if(total <=0) return;
       // 纯js操作 只需要先将三张图片位置确定好
       // 最左边按道理说是没有图片的 但是为了无限滚动效果 这里将其置为最后一张
       let left = total - 1;

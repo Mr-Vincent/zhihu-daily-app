@@ -13,11 +13,21 @@ const store = new Vuex.Store({
   state: {
     isShow: false,
     title: "",
+    dataAvailable:false,
     home: {}
   },
   getters: {
     isShowMethod: state => {
       return state.isShow;
+    },
+    headerData:state =>{
+      return state.home.top_stories;
+    },
+    newsList:state =>{
+      return state.home.stories;
+    },
+    showLoading:state =>{
+      return !state.dataAvailable;
     }
 
   },
@@ -33,6 +43,7 @@ const store = new Vuex.Store({
     },
     pendingHomeData(state, homeData) {
       state.home = homeData;
+      state.dataAvailable = true;
     }
   },
   actions: {
@@ -50,13 +61,12 @@ const store = new Vuex.Store({
       commit
     }) {
       // 获取API的数据
-      Http.get("/api/news/latest").then(res => {
+      Http.fetch("/api/news/latest",function(res){
         commit('pendingHomeData',res);
       });
-      
     }
   },
 
-})
+});
 
 export default store

@@ -17,7 +17,8 @@ export default {
   props:{
     newsList:{
       type:Array,
-      required:true
+      required:true,
+      default:[]
     }
   },
   methods:{
