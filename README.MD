@@ -16,17 +16,19 @@ npm run build
 ```
 
 ## todo
--[x] sidebar menu
--[x] carousel gallery
--[ ] pull down to update
--[ ] touch spec news title to detail
--[ ] switch to spec theme
--[ ] news comments
--[x] loading animation while fetching data
--[ ] some other details like icons etc.
+
+- [x] sidebar menu
+- [x] carousel gallery
+- [ ] pull down to update
+- [ ] touch spec news title to detail
+- [ ] switch to spec theme
+- [ ] news comments
+- [x] loading animation while fetching data
+- [ ] some other details like icons etc.
 
 ## frameworks support
 * vuex 
 * router 
 * axios
+
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
