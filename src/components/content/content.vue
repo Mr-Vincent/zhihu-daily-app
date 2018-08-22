@@ -24,6 +24,7 @@ export default {
   },
   data() {
     return {
+      id: parseInt(this.$route.params.id)
     };
   },
   mounted() {

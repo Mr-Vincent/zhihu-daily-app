@@ -2,7 +2,7 @@
   <div id="app">
     <Header :index="2"></Header>
     <Sidebar></Sidebar>
-    <Content></Content>
+    <router-view></router-view>
   </div>
 </template>
 

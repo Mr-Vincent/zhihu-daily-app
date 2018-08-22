@@ -1,6 +1,6 @@
-# my-project
+# zhihu-daily mobile version
 
-> A Vue.js project
+> Just for fun.Just for practise!
 
 ## Build Setup
 
