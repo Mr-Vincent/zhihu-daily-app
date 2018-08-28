@@ -1,5 +1,11 @@
 <template>
     <div>
+      <router-link :to="'/home'" class="link" >
+        <div class="item" @click="changeTheme(0)">
+            首页
+          <i class="icon-add"></i>
+        </div>
+      </router-link>
       <router-link :to="'/theme/' + item.id" class="link" v-for="item in filteredList" :key="item.id" >
         <div class="item" @click="changeTheme(item.id)">
             {{item.name}}
@@ -21,12 +27,18 @@ export default {
   },
   methods: {
     changeTheme(id) {
+      var title = "";
       this.selectedId = id;
       this.$store.dispatch({
         type: "hideSideBar"
       });
       var target = this.data.find(item =>item.id === id);
-      this.$store.commit("setTitle",target.name);
+      if(target) {
+        title = target.name;
+      }else{
+        title = "首页";
+      }
+      this.$store.commit("setTitle",title);
     }
   },
   computed: {

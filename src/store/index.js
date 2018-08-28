@@ -14,7 +14,8 @@ const store = new Vuex.Store({
     isShow: false,
     title: "",
     dataAvailable:false,
-    home: {}
+    home: {},
+    themeData:null
   },
   getters: {
     isShowMethod: state => {
@@ -28,6 +29,9 @@ const store = new Vuex.Store({
     },
     showLoading:state =>{
       return !state.dataAvailable;
+    },
+    themeData:state =>{
+      return state.themeData;
     }
 
   },
@@ -43,6 +47,10 @@ const store = new Vuex.Store({
     },
     pendingHomeData(state, homeData) {
       state.home = homeData;
+      state.dataAvailable = true;
+    },
+    pendingThemeData(state, themeData) {
+      state.themeData = themeData;
       state.dataAvailable = true;
     }
   },
@@ -63,6 +71,12 @@ const store = new Vuex.Store({
       // 获取API的数据
       Http.fetch("/api/news/latest",function(res){
         commit('pendingHomeData',res);
+      });
+    },
+    getThemeData({commit},id) {
+      // 获取API的数据
+      Http.fetch("/api/theme/"+id,function(res){
+        commit('pendingThemeData',res);
       });
     }
   },

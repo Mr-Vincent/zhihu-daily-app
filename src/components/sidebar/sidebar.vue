@@ -34,10 +34,6 @@
 import Catalog from "./catalog.vue"
 var data = [
   {
-    id: 0,
-    name: "首页"
-  },
-  {
     id: 13,
     name: "日常心理学"
   },

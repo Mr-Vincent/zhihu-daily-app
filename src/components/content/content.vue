@@ -1,12 +1,12 @@
 <template>
   <div class="content">
+    <div v-if="themeData" class="img">1111</div>
     <Swiper v-if="swiperData" :headerData="swiperData"></Swiper>
     <News v-if="newsList" :newsList="newsList"></News>
     <div class="loading" v-if="showLoading"><img src="../../assets/loading.gif"></div>
   </div>
 </template>
 <script>
-import homeData from "../../mock/home.js";
 import Swiper from "./swiper/swiper.vue";
 import News from "./theme-news/news.vue";
 export default {
@@ -20,12 +20,26 @@ export default {
     },
     showLoading() {
       return this.$store.getters.showLoading;
+    },
+    themeData() {
+      return this.$store.getters.themeData;
     }
   },
   data() {
     return {
-      id: parseInt(this.$route.params.id)
+      id: -1
     };
+  },
+  methods: {},
+  watch: {
+    $route(to, from) {
+      // 对路由变化作出响应...
+      this.id = parseInt(this.$route.params.id);
+      console.log(this.id);
+      if (this.id) {
+        this.$store.dispatch("getThemeData", this.id);
+      }
+    }
   },
   mounted() {
     this.$store.dispatch("getHomeData");
