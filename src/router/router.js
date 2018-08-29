@@ -11,7 +11,7 @@ const routers = [
       meta: {
           title: '主题日报'
       },
-      component: (resolve) => require(['../components/content/content.vue'], resolve)
+      component: (resolve) => require(['../components/content/banner/banner.vue'], resolve)
   },
   {
       path: '*',

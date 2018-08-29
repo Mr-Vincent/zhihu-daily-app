@@ -1,6 +1,5 @@
 <template>
   <div class="content">
-    <div v-if="themeData" class="img">1111</div>
     <Swiper v-if="swiperData" :headerData="swiperData"></Swiper>
     <News v-if="newsList" :newsList="newsList"></News>
     <div class="loading" v-if="showLoading"><img src="../../assets/loading.gif"></div>
