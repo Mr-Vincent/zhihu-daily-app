@@ -30,7 +30,7 @@ const store = new Vuex.Store({
     showLoading:state =>{
       return !state.dataAvailable;
     },
-    themeData:state =>{
+    themeData: state => {
       return state.themeData;
     }
 
@@ -49,11 +49,10 @@ const store = new Vuex.Store({
       state.home = homeData;
       state.dataAvailable = true;
     },
-    pendingThemeData(state, themeData,id) {
-      var key = id;
-      state.themeData[key] = themeData;
+    pendingThemeData(state, data) {
       state.dataAvailable = true;
-      console.log(state.themeData);
+      var key = data.id;
+      state.themeData[key] = data.themeData;
     }
   },
   actions: {
@@ -77,9 +76,14 @@ const store = new Vuex.Store({
     },
     getThemeData(context,id) {
       // 获取API的数据
+      var key = id;
+      if(context.state.themeData[key] != undefined) {
+        console.log("theme 数据已经存在，不再请求api");
+        return;
+      }
+      
       Http.fetch("/api/theme/"+id,function(res){
-        console.log(res);
-        context.commit('pendingThemeData',res);
+        context.commit('pendingThemeData',{'themeData':res,"id":id});
       });
     }
   },
