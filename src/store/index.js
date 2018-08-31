@@ -13,21 +13,21 @@ const store = new Vuex.Store({
   state: {
     isShow: false,
     title: "",
-    dataAvailable:false,
+    dataAvailable: false,
     home: {},
-    themeData:{}
+    themeData: {}
   },
   getters: {
     isShowMethod: state => {
       return state.isShow;
     },
-    headerData:state =>{
+    headerData: state => {
       return state.home.top_stories;
     },
-    newsList:state =>{
+    newsList: state => {
       return state.home.stories;
     },
-    showLoading:state =>{
+    showLoading: state => {
       return !state.dataAvailable;
     },
     themeData: state => {
@@ -70,21 +70,32 @@ const store = new Vuex.Store({
       commit
     }) {
       // 获取API的数据
-      Http.fetch("/api/news/latest",function(res){
-        commit('pendingHomeData',res);
+      Http.fetch("/api/news/latest").then((res) => {
+        commit('pendingHomeData', res);
+      }).catch(function (reason) {
+        console.log('失败：' + reason);
       });
     },
-    getThemeData(context,id) {
-      // 获取API的数据
-      var key = id;
-      if(context.state.themeData[key] != undefined) {
-        console.log("theme 数据已经存在，不再请求api");
-        return;
-      }
-      
-      Http.fetch("/api/theme/"+id,function(res){
-        context.commit('pendingThemeData',{'themeData':res,"id":id});
+    getThemeData(context, id) {
+      return new Promise((resolve, reject) => {
+        // 获取API的数据
+        var key = id;
+        if (context.state.themeData[key] != undefined) {
+          console.log("theme 数据已经存在，不再请求api");
+          return;
+        }
+        Http.fetch("/api/theme/" + id).then(res => {
+          context.commit('pendingThemeData', {
+            'themeData': res,
+            "id": id
+          });
+          resolve(res);
+        }).catch(function (reason) {
+          console.log('失败：' + reason);
+          reject();
+        });
       });
+
     }
   },
 

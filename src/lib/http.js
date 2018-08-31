@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 const http = axios.create({
@@ -6,15 +5,23 @@ const http = axios.create({
   timeout: 3000
 });
 
-http.interceptors.response.use(res=>{
-  return res.data;
-});
+// http.interceptors.response.use(res=>{
+//   return res.data;
+// });
 
 
-http.fetch =function(url,callback) {
-    http.get(url).then(res => {
-      callback(res);
-    });
+http.fetch = function (url) {
+  return new Promise((resolve, reject) => {
+    http.get(url).then((res) => {
+      if (!res || res.status != 200) {
+        reject(res.data.message || '获取数据失败');
+        return;
+      }
+      resolve(res.data);
+    }).catch((error) => {
+      reject('获取数据失败');
+    })
+  });
 }
 
 export default http;

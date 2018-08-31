@@ -2,6 +2,7 @@
   <div class="theme">
     <img :src="headImgData.image" :alt="headImgData.description">
     <div class="desc">{{headImgData.description}}</div>
+    <div class="loading" v-if="showLoading"><img src="../../../assets/loading.gif"></div>
   </div>
 </template>
 
@@ -14,61 +15,53 @@ export default {
     getStatus(urlStr) {
       var urlStrArr = urlStr.split("/");
       return urlStrArr[urlStrArr.length - 1];
-    },
-    promise(resolve, reject) {
-      var timeOut = 1;
-      setTimeout(function() {
-        if (timeOut == 1) {
-          resolve("200 OK");
-        } else {
-          reject("timeout in " + timeOut + " seconds.");
-        }
-      }, timeOut * 1000);
     }
   },
   mounted() {
-    console.log(this.id);
-    this.$store.dispatch("getThemeData", this.id);
+    this.$store.dispatch("getThemeData", this.id).then(res => {
+      this.loading = false;
+      this.data = res;
+    });
+    this.idCache.push(this.id);
   },
   data() {
     return {
+      loading: true,
+      idCache: [],
       id: this.$route.params.id,
       data: {
         image: "http://pic3.zhimg.com/da1fcaf6a02d1223d130d5b106e828b9.jpg",
-        description: "为你发现最有趣的新鲜事，建议在 WiFi 下查看"
+        description: "biu....biu....biu"
       }
     };
   },
   computed: {
     headImgData() {
       var key = this.id;
-      console.log(key);
       return this.data;
+    },
+    showLoading() {
+      return this.loading;
     }
   },
   watch: {
     $route(to, from) {
+      this.loading = true;
       // 对路由变化作出响应...
+      let currentId = this.getStatus(this.$route.path);
       this.id = this.getStatus(this.$route.path);
-      console.log("检测到url发生变化了：" + this.id);
-      if (this.id) {
-        this.$store.dispatch("getThemeData", this.id);
-      }
-      var key = this.id;
-      new Promise((resolve, reject) => {
-        if (this.$store.getters.themeData[key] == undefined) {
-          reject("数据未就位");
-        } else {
-          resolve("数据到位了");
-        }
-      })
-        .then(result => {
-          this.data = this.$store.getters.themeData[key];
-          console.log(result + ":" + this.data);
-        })
-        .catch(reason => {
-          console.log("失败：" + reason);
+      if (this.idCache.indexOf(currentId) !== -1) {
+        // 存在这个id 直接赋值
+        var key = this.id;
+        this.data = this.$store.getters.themeData[key];
+        this.loading = false;
+      } else {
+        this.$store.dispatch("getThemeData", this.id).then(res => {
+          this.loading = false;
+          this.data = res;
         });
+        this.idCache.push(this.id);
+      }
     }
   }
 };
@@ -85,6 +78,24 @@ export default {
   text-align: left;
   font-size: 22px;
   padding: 16px;
+}
+.loading {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  transform: translate(-50px, -50px);
+  border-radius: 4px;
+}
+.loading img {
+  width: 100px;
+  height: 100px;
 }
 </style>
 
